@@ -290,7 +290,11 @@
                         <div class="line"></div>
                         <p>Every Great Home (Professional Builder, Designer and Realtor) begins with a conversation. Share your ideas and our team will be happy to discuss your next project.</p>
                     </div>
-                    <form id="quote-form">
+                    <form id="quote-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/?success=true#contact">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p hidden>
+                            <label>Don’t fill this out: <input name="bot-field"></label>
+                        </p>
                         <input name="name" placeholder="Your Name *" aria-label="Your Name" required>
                         <input name="email" type="email" placeholder="Email Address *" aria-label="Email Address" required>
                         <input name="phone" type="tel" placeholder="Phone Number" aria-label="Phone Number">
