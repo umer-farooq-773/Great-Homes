@@ -82,3 +82,29 @@ async function loadGreatHomesFeed() {
 }
 
 loadGreatHomesFeed();
+
+
+const quoteForm = document.getElementById('quote-form');
+const formStatus = document.getElementById('form-status');
+
+quoteForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = quoteForm.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  formStatus.textContent = 'Sending...';
+
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(quoteForm)).toString()
+    });
+    if (!res.ok) throw new Error('Status ' + res.status);
+    quoteForm.reset();
+    formStatus.textContent = 'Thank you! Your quote request has been sent.';
+  } catch (err) {
+    formStatus.textContent = 'Sorry, something went wrong. Please WhatsApp us at 0342 4956071.';
+  } finally {
+    btn.disabled = false;
+  }
+});
